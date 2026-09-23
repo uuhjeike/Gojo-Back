@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gojo Back</title>
+  <meta name="description" content="Gojo Back — profile" />
+  <link rel="icon" href="file_000000006f5482309020dd84155307a5.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;650;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Cinematic animated background -->
+  <div class="bg-layer" id="bgLayer">
+    <video
+      id="bgVideo"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      aria-hidden="true"
+    >
+      <source src="6efa14de8ffe4c2358cb0ae55dc5785e_720w.mp4" type="video/mp4" />
+    </video>
+    <img
+      class="bg-fallback-img"
+      src="file_000000006f5482309020dd84155307a5.png"
+      alt=""
+      aria-hidden="true"
+    />
+    <div class="bg-scrim"></div>
+  </div>
+
+  <main class="page">
+
+    <!-- Profile identity -->
+    <header class="profile">
+      <div class="profile-avatar">
+        <img
+          src="file_000000006f5482309020dd84155307a5.png"
+          alt="Gojo Back profile photo"
+          width="108"
+          height="108"
+        />
+      </div>
+      <div class="profile-info">
+        <h1 class="profile-name">Gojo Back</h1>
+        <p class="profile-handle">@gojoback</p>
+      </div>
+    </header>
+
+    <!-- Post feed, populated by script.js from text 1.txt -->
+    <section class="feed" id="feed" aria-label="Posts">
+      <div class="feed-state" id="feedState">Loading posts…</div>
+    </section>
+
+    <footer class="page-footer">
+      <p>Gojo Back</p>
+    </footer>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
