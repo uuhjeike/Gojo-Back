@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Gojo Back</title>
+<meta name="description" content="Gojo Back — profile.">
+<meta name="color-scheme" content="dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=Noto+Sans+Bengali:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Layer 1 + 2: base background and cinematic video, fixed behind everything -->
+<div class="scene" aria-hidden="true">
+  <video
+    class="scene__video"
+    id="bgVideo"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto"
+    poster="https://raw.githubusercontent.com/uuhjeike/Gojo-Back/main/file_000000006f5482309020dd84155307a5.png">
+    <source src="https://raw.githubusercontent.com/uuhjeike/Gojo-Back/main/6efa14de8ffe4c2358cb0ae55dc5785e_720w.mp4" type="video/mp4">
+  </video>
+  <img
+    class="scene__fallback"
+    id="bgFallback"
+    src="https://raw.githubusercontent.com/uuhjeike/Gojo-Back/main/file_000000006f5482309020dd84155307a5.png"
+    alt=""
+    loading="eager"
+    decoding="async">
+  <!-- Layer 3: readability overlay -->
+  <div class="scene__overlay"></div>
+  <!-- Layer 4: subtle atmospheric lighting derived from the asset palette -->
+  <div class="scene__glow"></div>
+</div>
+
+<a class="skip-link" href="#feed">Skip to posts</a>
+
+<!-- Layer 5: profile + feed content -->
+<header class="profile" role="banner">
+  <div class="profile__inner">
+    <img
+      class="profile__avatar"
+      src="https://raw.githubusercontent.com/uuhjeike/Gojo-Back/main/file_000000006f5482309020dd84155307a5.png"
+      alt="Gojo Back profile photo"
+      width="220"
+      height="220"
+      loading="eager"
+      decoding="async">
+    <h1 class="profile__name">Gojo Back</h1>
+  </div>
+</header>
+
+<main id="feed" class="feed" aria-label="Posts">
+  <div class="feed__list" id="feedList">
+    <!-- Posts are rendered here by script.js -->
+  </div>
+
+  <p class="feed__status" id="feedStatus" role="status" hidden></p>
+</main>
+
+<footer class="site-footer">
+  <p>Gojo Back</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
