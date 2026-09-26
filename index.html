@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gojo — Back</title>
+<meta name="description" content="Gojo's profile — night thoughts, poems, moons and machines.">
+<link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/file_000000006f5482309020dd84155307a5.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   Gojo — profile stylesheet
+   Palette: near-black void, layered ink-blue panels, one cyan signal
+   ============================================================ */
+
+:root {
+  --void: #05070c;
+  --void-2: #080b14;
+  --panel: #0d1220;
+  --panel-soft: #10162a;
+  --line: #1e2740;
+  --line-soft: #161d33;
+  --ink: #eef2fb;
+  --ink-dim: #8b96b8;
+  --ink-faint: #59617c;
+  --signal: #58baff;
+  --signal-2: #2b6fe0;
+  --signal-glow: rgba(88, 186, 255, 0.45);
+  --danger: #ff6a88;
+
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+
+  --font-display: "Unbounded", "Manrope", sans-serif;
+  --font-body: "Manrope", "Noto Sans Bengali", sans-serif;
+
+  --max: 620px;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}
+
+body {
+  margin: 0;
+  background: var(--void);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img, video { max-width: 100%; display: block; }
+
+a { color: inherit; }
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 2px;
+}
+
+::selection { background: var(--signal-2); color: #fff; }
+
+/* subtle film-grain / vignette texture over the whole page for the cinematic feel */
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background: radial-gradient(ellipse at 50% 0%, rgba(88,186,255,0.05), transparent 55%),
+              radial-gradient(ellipse at 50% 100%, rgba(0,0,0,0.55), transparent 60%);
+  mix-blend-mode: screen;
+}
+
+/* ---------------- Topbar ---------------- */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(5, 7, 12, 0.72);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.topbar.is-scrolled {
+  border-bottom-color: var(--line-soft);
+}
+
+.topbar-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.brand-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid var(--signal);
+}
+
+.brand-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.01em;
+  display: none;
+}
+
+@media (min-width: 420px) {
+  .brand-name { display: inline; }
+}
+
+.search-wrap {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  width: 16px;
+  height: 16px;
+  color: var(--ink-faint);
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 9px 34px 9px 34px;
+  color: var(--ink);
+  font-size: 14px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.search-input::placeholder { color: var(--ink-faint); }
+
+.search-input:focus-visible {
+  border-color: var(--signal-2);
+  background: var(--panel-soft);
+}
+
+.search-clear {
+  position: absolute;
+  right: 8px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  color: var(--ink-dim);
+  font-size: 16px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.search-clear:hover { color: var(--ink); background: var(--line-soft); }
+
+.icon-btn {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-dim);
+  border: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+.icon-btn svg { width: 18px; height: 18px; }
+.icon-btn:hover { color: var(--ink); background: var(--panel); }
+.icon-btn[aria-pressed="true"] {
+  color: var(--signal);
+  border-color: rgba(88,186,255,0.35);
+  background: rgba(88,186,255,0.08);
+}
+
+/* ---------------- Hero ---------------- */
+
+.hero {
+  position: relative;
+  height: min(78vh, 620px);
+  min-height: 420px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(5,7,12,0.35) 0%, rgba(5,7,12,0.25) 35%, rgba(5,7,12,0.88) 82%, var(--void) 100%),
+    radial-gradient(ellipse 60% 40% at 50% 100%, rgba(88,186,255,0.16), transparent 70%);
+}
+
+.mute-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 5;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(5,7,12,0.5);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mute-btn svg { width: 18px; height: 18px; }
+.mute-btn:hover { border-color: var(--signal); color: var(--signal); }
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 20px 28px;
+  text-align: center;
+}
+
+.avatar-ring {
+  width: 108px;
+  height: 108px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  padding: 3px;
+  background: conic-gradient(from 200deg, var(--signal), transparent 30%, transparent 70%, var(--signal));
+  box-shadow: 0 0 0 1px rgba(88,186,255,0.15), 0 0 36px var(--signal-glow);
+  animation: ring-pulse 4.5s ease-in-out infinite;
+}
+
+@keyframes ring-pulse {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(88,186,255,0.15), 0 0 26px var(--signal-glow); }
+  50% { box-shadow: 0 0 0 1px rgba(88,186,255,0.28), 0 0 44px var(--signal-glow); }
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--panel);
+  border: 3px solid var(--void);
+}
+
+.display-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(26px, 6vw, 34px);
+  margin: 0 0 2px;
+  text-shadow: 0 0 24px rgba(88,186,255,0.35);
+}
+
+.handle {
+  margin: 0 0 12px;
+  color: var(--signal);
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.bio {
+  margin: 0 auto 18px;
+  max-width: 40ch;
+  color: var(--ink-dim);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.stats {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(13,18,32,0.6);
+  border: 1px solid var(--line-soft);
+  backdrop-filter: blur(8px);
+  padding: 10px 20px;
+  border-radius: 999px;
+}
+
+.stat { display: flex; flex-direction: column; align-items: center; line-height: 1.2; }
+.stat strong { font-size: 15px; font-weight: 800; }
+.stat span { font-size: 11.5px; color: var(--ink-faint); margin-top: 1px; }
+.stat-sep { width: 1px; height: 22px; background: var(--line); }
+
+/* ---------------- Feed shell / tabs ---------------- */
+
+.feed-shell {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 18px 14px 0;
+  position: relative;
+  z-index: 3;
+}
+
+.feed-tabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 14px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.feed-tabs::-webkit-scrollbar { display: none; }
+
+.feed-tab {
+  flex-shrink: 0;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink-dim);
+  border: 1px solid var(--line);
+  background: var(--panel);
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+.feed-tab:hover { color: var(--ink); }
+.feed-tab.is-active {
+  color: var(--void);
+  background: var(--signal);
+  border-color: var(--signal);
+}
+
+.active-tag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--ink-dim);
+  margin: 12px 2px 4px;
+}
+.active-tag span { color: var(--signal); font-weight: 700; }
+.active-tag button {
+  color: var(--ink-faint);
+  text-decoration: underline;
+  font-size: 13px;
+}
+.active-tag button:hover { color: var(--ink); }
+
+/* ---------------- Feed / posts ---------------- */
+
+.feed {
+  padding: 18px 0 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.post {
+  animation: post-in 0.5s ease both;
+}
+
+@keyframes post-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.post[hidden] { display: none; }
+
+/* default: media / card post */
+.post-card {
+  background: linear-gradient(180deg, var(--panel-soft), var(--panel));
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 16px 16px 10px;
+}
+
+/* long-form text posts (poems / essays): no box, quote-style rail */
+.post-longform {
+  padding: 4px 0 4px 18px;
+  border-left: 2px solid var(--line);
+  position: relative;
+}
+.post-longform::before {
+  content: "";
+  position: absolute;
+  left: -2px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--signal), transparent 65%);
+}
+
+/* tiny mood / status posts */
+.post-mood {
+  padding: 10px 16px;
+  background: var(--panel);
+  border: 1px solid var(--line-soft);
+  border-radius: 999px;
+  max-width: fit-content;
+  color: var(--ink-dim);
+  font-size: 14.5px;
+}
+.post-mood .post-actions { display: none; }
+
+.post-text {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-size: 15px;
+  color: var(--ink);
+  margin: 0 0 10px;
+}
+
+.post-longform .post-text {
+  font-size: 15.5px;
+  line-height: 1.95;
+  color: #dbe3f5;
+  max-width: 56ch;
+}
+
+.post-longform .post-text:first-line {
+  font-weight: 700;
+}
+
+.tag {
+  color: var(--signal);
+  font-weight: 600;
+  cursor: pointer;
+}
+.tag:hover { text-decoration: underline; }
+
+/* ---- media: single image ---- */
+.media-block { margin: 4px 0 12px; border-radius: var(--radius-md); overflow: hidden; }
+
+.img-single {
+  width: 100%;
+  display: block;
+  border-radius: var(--radius-md);
+  cursor: zoom-in;
+  background: var(--void-2);
+  aspect-ratio: auto;
+}
+
+img.is-loading { min-height: 180px; background: linear-gradient(100deg, var(--panel) 30%, var(--panel-soft) 50%, var(--panel) 70%); background-size: 200% 100%; animation: shimmer 1.4s ease-in-out infinite; }
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+/* ---- media: carousel gallery ---- */
+.carousel {
+  position: relative;
+}
+.carousel-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 6px;
+  border-radius: var(--radius-md);
+  scrollbar-width: none;
+}
+.carousel-track::-webkit-scrollbar { display: none; }
+.carousel-track img {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  width: 100%;
+  max-height: 520px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  cursor: zoom-in;
+  background: var(--void-2);
+}
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 8px;
+}
+.carousel-dots span {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--line);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.carousel-dots span.is-active { background: var(--signal); transform: scale(1.3); }
+.carousel-count {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(5,7,12,0.65);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+
+/* ---- media: video / audio ---- */
+.video-wrap { position: relative; border-radius: var(--radius-md); overflow: hidden; background: #000; }
+.video-wrap video { width: 100%; max-height: 560px; display: block; }
+
+.audio-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--panel);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-md);
+  padding: 12px;
+}
+.audio-icon {
+  flex-shrink: 0;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: rgba(88,186,255,0.12);
+  color: var(--signal);
+  display: flex; align-items: center; justify-content: center;
+}
+.audio-icon svg { width: 20px; height: 20px; }
+.audio-body { flex: 1; min-width: 0; }
+.audio-title { font-size: 13.5px; font-weight: 600; margin: 0 0 6px; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.audio-body audio { width: 100%; height: 34px; }
+
+/* ---- media: youtube facade ---- */
+.yt-facade {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--void-2);
+  aspect-ratio: 16/9;
+}
+.yt-facade img { width: 100%; height: 100%; object-fit: cover; }
+.yt-play {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(180deg, rgba(0,0,0,0.05), rgba(0,0,0,0.45));
+}
+.yt-play span {
+  width: 58px; height: 58px;
+  border-radius: 50%;
+  background: rgba(5,7,12,0.55);
+  border: 1.5px solid rgba(255,255,255,0.35);
+  backdrop-filter: blur(3px);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.yt-facade:hover .yt-play span { transform: scale(1.08); background: var(--signal-2); }
+.yt-play svg { width: 22px; height: 22px; margin-left: 3px; color: #fff; }
+.yt-embed-wrap { position: relative; border-radius: var(--radius-md); overflow: hidden; aspect-ratio: 16/9; background: #000; }
+.yt-embed-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+/* ---- media: external link card (facebook / pinterest / gdoc) ---- */
+.link-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-md);
+  padding: 13px 14px;
+  background: var(--panel);
+  text-decoration: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.link-card:hover { border-color: var(--signal-2); background: var(--panel-soft); }
+.link-icon {
+  flex-shrink: 0;
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  background: rgba(88,186,255,0.1);
+  color: var(--signal);
+  display: flex; align-items: center; justify-content: center;
+}
+.link-icon svg { width: 19px; height: 19px; }
+.link-body { flex: 1; min-width: 0; }
+.link-title { font-size: 14px; font-weight: 700; margin: 0; color: var(--ink); }
+.link-sub { font-size: 12.5px; color: var(--ink-faint); margin: 2px 0 0; }
+.link-arrow { color: var(--ink-faint); font-size: 18px; flex-shrink: 0; }
+
+/* ---- media: note (fetched text file) ---- */
+.note-card {
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-md);
+  background: var(--panel);
+  overflow: hidden;
+}
+.note-head {
+  display: flex; align-items: center; gap: 8px;
+  padding: 11px 14px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink-dim);
+  border-bottom: 1px solid var(--line-soft);
+}
+.note-head svg { width: 15px; height: 15px; color: var(--signal); }
+.note-body {
+  padding: 14px;
+  font-size: 14.5px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  color: #dbe3f5;
+  max-height: 260px;
+  overflow-y: auto;
+}
+.note-loading { padding: 16px; color: var(--ink-faint); font-size: 13.5px; }
+
+/* ---------------- Post actions ---------------- */
+
+.post-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 0 8px;
+  margin-top: 2px;
+  border-top: 1px solid var(--line-soft);
+}
+.post-longform + .post-actions,
+.post-longform .post-actions { border-top: none; padding-top: 12px; }
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-faint);
+  transition: color 0.15s ease, background 0.15s ease;
+}
+.action-btn svg { width: 18px; height: 18px; }
+.action-btn:hover { color: var(--ink); background: var(--line-soft); }
+
+.action-like.is-active { color: var(--danger); }
+.action-like.is-active svg { fill: var(--danger); }
+.action-save.is-active { color: var(--signal); }
+.action-save.is-active svg { fill: var(--signal); }
+
+.action-spacer { flex: 1; }
+
+/* ---------------- Empty state / footer ---------------- */
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--ink-faint);
+}
+.empty-state p { font-size: 16px; font-weight: 700; color: var(--ink-dim); margin: 0 0 4px; }
+.empty-state span { font-size: 13.5px; }
+
+.site-footer {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 10px 20px 48px;
+  text-align: center;
+  color: var(--ink-faint);
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+
+/* ---------------- To-top button ---------------- */
+
+.to-top {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 30;
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: var(--panel-soft);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  transition: opacity 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+.to-top svg { width: 18px; height: 18px; }
+.to-top:hover { border-color: var(--signal); color: var(--signal); }
+.to-top[hidden] { display: none; }
+
+/* ---------------- Lightbox ---------------- */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(3,4,8,0.94);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(6px);
+}
+.lightbox[hidden] { display: none; }
+.lb-img {
+  max-width: min(92vw, 900px);
+  max-height: 86vh;
+  border-radius: 6px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+}
+.lb-close {
+  position: absolute; top: 16px; right: 18px;
+  font-size: 30px; line-height: 1; color: #fff;
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.lb-close:hover { background: rgba(255,255,255,0.1); }
+.lb-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  font-size: 26px;
+  display: flex; align-items: center; justify-content: center;
+}
+.lb-nav:hover { background: rgba(255,255,255,0.18); }
+.lb-prev { left: 14px; }
+.lb-next { right: 14px; }
+.lb-nav[hidden] { display: none; }
+.lb-count {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,255,255,0.7);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ---------------- Toast ---------------- */
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 26px;
+  transform: translate(-50%, 20px);
+  background: #12182c;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 13.5px;
+  font-weight: 600;
+  z-index: 90;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+}
+.toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ---------------- Responsive ---------------- */
+
+@media (min-width: 720px) {
+  .feed-shell { padding-top: 24px; }
+  .post-card { padding: 20px 20px 12px; }
+}
+
+@media (max-width: 380px) {
+  .stats { gap: 10px; padding: 9px 14px; }
+  .bio { font-size: 14px; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<header class="topbar" id="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#top" aria-label="Gojo — back to top">
+      <img class="brand-avatar" src="https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/file_000000006f5482309020dd84155307a5.png" alt="">
+      <span class="brand-name">Gojo</span>
+    </a>
+
+    <div class="search-wrap">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input id="searchInput" class="search-input" type="text" placeholder="Search posts and tags" autocomplete="off">
+      <button id="searchClear" class="search-clear" type="button" aria-label="Clear search" hidden>&times;</button>
+    </div>
+
+    <button id="savedToggle" class="icon-btn" type="button" aria-pressed="false" aria-label="Show saved posts" title="Saved posts">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 4h12v16l-6-4-6 4V4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" id="hero">
+    <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="auto"
+      poster="https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/file_000000006f5482309020dd84155307a5.png">
+      <source src="https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/6efa14de8ffe4c2358cb0ae55dc5785e_720w.mp4" type="video/mp4">
+    </video>
+    <div class="hero-scrim"></div>
+    <button class="mute-btn" id="muteBtn" type="button" aria-pressed="true" aria-label="Unmute background video">
+      <svg id="muteIconOn" viewBox="0 0 24 24" fill="none"><path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor"/><path d="M16.5 8.5a5 5 0 010 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <svg id="muteIconOff" viewBox="0 0 24 24" fill="none" hidden><path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor"/><path d="M15 9l5 6M20 9l-5 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+
+    <div class="hero-content">
+      <div class="avatar-ring">
+        <img class="avatar-img" src="https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/file_000000006f5482309020dd84155307a5.png" alt="Gojo's profile photo">
+      </div>
+      <h1 class="display-name">Gojo</h1>
+      <p class="handle">@gojoback</p>
+      <p class="bio">Poems after midnight, moons over the roof, and whatever else won't let me sleep.</p>
+      <div class="stats" id="statsRow">
+        <div class="stat"><strong id="statPosts">0</strong><span>posts</span></div>
+        <div class="stat-sep" aria-hidden="true"></div>
+        <div class="stat"><strong id="statPhotos">0</strong><span>photos</span></div>
+        <div class="stat-sep" aria-hidden="true"></div>
+        <div class="stat"><strong id="statClips">0</strong><span>clips</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="feed-shell">
+    <div class="feed-tabs" role="tablist" aria-label="Filter posts">
+      <button class="feed-tab is-active" data-filter="all" role="tab" aria-selected="true" type="button">All</button>
+      <button class="feed-tab" data-filter="text" role="tab" aria-selected="false" type="button">Words</button>
+      <button class="feed-tab" data-filter="image" role="tab" aria-selected="false" type="button">Photos</button>
+      <button class="feed-tab" data-filter="video" role="tab" aria-selected="false" type="button">Clips</button>
+      <button class="feed-tab" data-filter="audio" role="tab" aria-selected="false" type="button">Audio</button>
+      <button class="feed-tab" data-filter="link" role="tab" aria-selected="false" type="button">Links</button>
+    </div>
+
+    <p class="active-tag" id="activeTagBar" hidden>
+      Filtering by <span id="activeTagLabel"></span>
+      <button id="activeTagClear" type="button">Clear</button>
+    </p>
+
+    <section class="feed" id="feed" aria-live="polite"></section>
+
+    <div class="empty-state" id="emptyState" hidden>
+      <p>Nothing here.</p>
+      <span>Try a different search, or clear the filter.</span>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <span>Every post above is exactly as it was written — night owl hours, half-finished thoughts, and all.</span>
+  </footer>
+</main>
+
+<button class="to-top" id="toTop" type="button" aria-label="Back to top" hidden>
+  <svg viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="lb-close" id="lbClose" type="button" aria-label="Close">&times;</button>
+  <button class="lb-nav lb-prev" id="lbPrev" type="button" aria-label="Previous image" hidden>&#8249;</button>
+  <img class="lb-img" id="lbImg" src="" alt="">
+  <button class="lb-nav lb-next" id="lbNext" type="button" aria-label="Next image" hidden>&#8250;</button>
+  <div class="lb-count" id="lbCount" hidden></div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ============================================================
+   Gojo — profile script
+   Renders the post feed from data, handles lazy loading,
+   search/filter, like/save (persisted), lightbox and hero video.
+   ============================================================ */
+
+(function () {
+  "use strict";
+
+  var POSTS = [{"id":1,"text":"Discover popular mobile brands and the countries where they originated, from Apple and Samsung to Nokia, Xiaomi, Sony, and more.\n#MobileBrands #smartphonebrand #TechFacts #phonehistory #technology","media":[{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/100/FB_IMG_1790369997536.jpg"}]},{"id":2,"text":"যার ভালো চেয়েছিলাম\n\nআমি যখন আমার কথাগুলো\nবোঝানোর চেষ্টা করি,\nকেন যেন প্রতিটি কথার শেষে\nএকটা তর্ক জন্ম নেয়—\nআর তর্কের শেষে\nদোষটা এসে থামে\nআমারই দরজায়।\n\nআমি তো তোমার সঙ্গে\nজিততে চাইনি কোনোদিন,\nশুধু চেয়েছিলাম\nতুমি একবার বুঝে নাও—\nআমার রাগের আড়ালে কতটা ভয়,\nআমার নীরবতার নিচে কতটা শব্দ,\nআর আমার কঠিন কথাগুলোর ভেতরে\nকতটা কোমল ভালোবাসা লুকিয়ে ছিল।\n\nকিন্তু মানুষ তো হৃদয় পড়তে শেখেনি,\nসে শুধু শব্দ মনে রাখে।\n\nতাই আমি যে রাতে\nতোমার জন্য নির্ঘুম ছিলাম,\nসেটা হারিয়ে যায় অন্ধকারে;\nআমি যে শতবার\nনিজেকে থামিয়েছি তোমাকে কষ্ট দেব না বলে,\nসেসব নীরবতা কেউ দেখে না—\nসবাই শুধু মনে রাখে\nশেষবার আমি কী বলেছিলাম।\n\nঅথচ বিশ্বাস করো,\nআমি তোমার পথ আটকাতে চাইনি,\nশুধু চেয়েছিলাম\nতুমি যেন ভুল পথে গিয়ে\nনিজেকেই হারিয়ে না ফেলো।\n\nআমি তোমাকে বেঁধে রাখতে চাইনি,\nশুধু ভেবেছিলাম—\nযাকে এতটা ভালোবাসি,\nতার হাতটা যদি একবার\nসাবধানে ধরে রাখি,\nহয়তো সে পড়ে যাওয়ার আগে\nআমার হাতটুকু অনুভব করবে।\n\nকিন্তু সেই হাতই একদিন\nতোমার কাছে শেকল হয়ে গেল,\nআমার সতর্কতা হয়ে গেল সন্দেহ,\nআমার যত্ন হয়ে গেল নিয়ন্ত্রণ,\nআর আমার ভালোবাসা—\nঅকারণ এক তর্ক।\n\nতারপর একদিন\nতুমি আমাকে এমনভাবে দেখলে,\nযেন আমি তোমার জীবনের\nসবচেয়ে খারাপ মানুষ।\n\nআমি কিছু বলিনি।\n\nকারণ কিছু সত্য\nমুখে বললে ছোট হয়ে যায়,\nকিছু ভালোবাসা\nপ্রমাণ করতে গেলে অপমানিত হয়,\nআর কিছু মানুষকে\nনিজের নির্দোষিতা বোঝাতে বোঝাতে\nশেষ পর্যন্ত মানুষ নিজেকেই\nঅপরাধী মনে করতে শুরু করে।\n\nতাই আজ আর\nআমার কোনো কথা বোঝাতে চাই না।\n\nতুমি আমাকে ভুল বুঝলে—\nভুল বুঝেই থেকো।\n\nশুধু কোনো এক নীরব রাতে,\nযখন পৃথিবীর সব শব্দ থেমে যাবে,\nযখন তোমার পাশে কেউ থাকবে না\nতোমার অভিমানগুলো শুনতে,\nতখন যদি হঠাৎ\nআমার বলা কোনো কঠিন কথা মনে পড়ে—\n\nতার একটু গভীরে যেও।\n\nহয়তো দেখবে,\nসেই কথার ভেতরে রাগ ছিল না,\nছিল হারিয়ে ফেলার ভয়।\n\nঅভিযোগ ছিল না,\nছিল তোমাকে আগলে রাখার ব্যর্থ চেষ্টা।\n\nআর ঘৃণা তো একেবারেই ছিল না—\nছিল এমন এক ভালোবাসা,\nযে ভালোবাসা\nতোমার ভালো থাকার জন্য\nনিজেকেই খারাপ হতে রাজি ছিল।\n\nআজ তোমার কাছে আমি খারাপ—\nহয়তো সত্যিই তাই।\n\nকারণ পৃথিবীতে\nভালো মানুষ হওয়ার চেয়েও\nবেশি কঠিন হলো—\nকাউকে ভালোবেসে\nতার চোখে ভালো মানুষ হয়ে থাকা।\n\nতাই আমার গল্পের শেষ পাতায়\nনিজের নামে আর কোনো সাফাই লিখব না।\n\nশুধু একটি বাক্য রেখে যাব—\n\n\"যার ভালো চেয়েছিলাম,\nশেষ পর্যন্ত তার কাছেই খারাপ হয়ে গেলাম;\nতবু আফসোস নেই—\nকারণ আমার ভালোবাসা\nতার ভালো থাকাটুকুর চেয়ে\nকখনো বড় ছিল না।\"","media":[]},{"id":3,"text":"","media":[{"type":"youtube","url":"https://youtu.be/lS5UUX8pf80?si=wXW0Sh59jSFSRGo8","id":"lS5UUX8pf80"}]},{"id":4,"text":"","media":[{"type":"youtube","url":"https://youtu.be/nzN9FiJT4Ns?si=Q7xUSh9VRytLnZOb","id":"nzN9FiJT4Ns"}]},{"id":5,"text":"Moon 🌙 ⭐ ♥️","media":[{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/Post/Moon/20260926_005924.jpg"},{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/Post/Moon/20260926_005959.jpg"},{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/Post/Moon/20260926_010042.jpg"},{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/Post/Moon/20260926_010108.jpg"},{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/Post/Moon/20260926_005518.jpg"},{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/Post/Moon/20260926_005542.jpg"},{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/Post/Moon/20260926_005602.jpg"},{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/Post/Moon/20260926_005708.jpg"},{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/Post/Moon/20260926_005842.jpg"}]},{"id":6,"text":"","media":[{"type":"youtube","url":"https://youtu.be/CuiCkfddORU?si=l_z7utZboNzMg_3S","id":"CuiCkfddORU"}]},{"id":7,"text":"","media":[{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/100/IMG_20260925_172036.jpg"}]},{"id":8,"text":"","media":[{"type":"pinterest","url":"https://pin.it/5eqOmVViy"}]},{"id":9,"text":"","media":[{"type":"audio","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/100/Shada____%E0%A6%B8%E0%A6%BE%E0%A6%A6%E0%A6%BE____Minar____Tahsan____Danpite____Bangla_New_Song____Official_Lyrical_video(256k).mp3"}]},{"id":10,"text":"","media":[{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/100/3781790dca0b5a5c00e76c04e8b45563.jpg"}]},{"id":11,"text":"sky","media":[{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/100/IMG_20260925_170652.jpg"}]},{"id":12,"text":"THE DARKEST KNOWLEDGE HUMANITY COULD DISCOVER\n\nWhat if humanity eventually proves that there is no objective meaning to existence?\n\nNot that life is meaningless to us personally.\n\nSomething deeper.\n\nImagine discovering that consciousness is simply an emergent process produced by matter, that there is no cosmic purpose behind life, and that the universe does not care whether humanity survives for another million years—or disappears tomorrow.\n\nNo hidden plan.\n\nNo guaranteed destiny.\n\nNo universal observer.\n\nJust matter, energy, time… and temporary beings capable of asking why they exist.\n\nAnd the darkest part?\n\nThe universe wouldn't even need to destroy us.\n\nIt could simply continue.\n\nStars would keep forming.\n\nGalaxies would keep moving.\n\nPlanets would keep orbiting.\n\nAnd eventually, everything humanity ever created—our languages, cities, memories, wars, discoveries, photographs, names and stories—could vanish without leaving anything that remembers us.\n\nYet there is one strange possibility that makes this darkness even deeper:\n\nMaybe the universe doesn't need to have a purpose for our existence to matter.\n\nPerhaps meaning isn't something waiting to be discovered.\n\nPerhaps meaning is something consciousness creates while it is here.\n\nAnd maybe that is the most terrifying freedom of all:\n\n**There may be no answer waiting for us.\n\nWe may be the ones who have to create one.**","media":[]},{"id":13,"text":"😴😴😴","media":[]},{"id":14,"text":"cul katte hobe. \n😕😕😕\nkichi Valo jay na.\nsap 25, 2026","media":[]},{"id":15,"text":"","media":[{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/100/FB_IMG_1790286913702.jpg"}]},{"id":16,"text":"The Most Unusual Handguns Ever Made: A Look at the Mateba 6 Unica, Chiappa Rhino 60DS and Iconic Mauser C96 #europe #germany #italy","media":[{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/100/FB_IMG_1790277101247.jpg"}]},{"id":17,"text":"50+ Technologies That Changed Human Civilization 🌍💡\n#TechnologyEvolution #TechHistory#HumanCivilization#technology #TechInnovation","media":[{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/100/FB_IMG_1790242034599.jpg"}]},{"id":18,"text":"","media":[{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/100/9077c04a5cda1f1920ab08699e49c986.jpg"}]},{"id":19,"text":"","media":[{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/100/IMG_20260924_113726.jpg"},{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/100/IMG_20260924_114047.jpg"},{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/100/IMG_20260924_134527.jpg"}]},{"id":20,"text":"11:18 ta baje but akhni kichi hy nai. ar anek gum o paiche.","media":[]},{"id":21,"text":"11:06 akhono start hy ni.","media":[]},{"id":22,"text":"Ashakori ICT Amar temn tuff hbe na.","media":[]},{"id":23,"text":"1000 ar deshi line khekha Jane na. ar ager ta to 20,000 line a chilo ar aro kaj hto tai ar pari I nai. \n11:04 sap 24, 2026","media":[]},{"id":24,"text":"so AJ ami college a ache chi. akta event hode. kaoke cini na. na cinlei Valo Amar jno. boleche to 1st year a. dekhi ki hy akhn 11:1am baje akhn start hbe. AJke Abar kajeo Jai nai. ami ja cai ta ki pabo?","media":[]},{"id":25,"text":"","media":[{"type":"video","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/100/AQONWoXNOr9UHrJbuFNuwZJjWkt7i7cLyF4oTYG_wkdsSk_VVDST2Xg86fYjnS9E8m9WbA_hQtwLJe-SSSfrp_ikCQeMDq7QYq7dSfEXSA.mp4"}]},{"id":26,"text":"😴😴😴\n2:59am\nkalo kaj ache.","media":[]},{"id":27,"text":"","media":[{"type":"textfile","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/100/The%20City%20That%20Was%20Born%20Every%20Night.txt"}]},{"id":28,"text":"","media":[{"type":"gdoc","url":"https://docs.google.com/document/d/1Crqhf2GEOERi1tsFsn9jVr3zJtv-zPJA0JNlIXD23Yg/edit?usp=drivesdk"}]},{"id":29,"text":"Every night, just before midnight, a small yellow lamp appeared at the end of a quiet road.\n\nNobody knew who lit it.\n\nThe road itself was almost forgotten. It passed between sleeping trees, crossed a little wooden bridge, and disappeared into the darkness beyond the village.\n\nOne night, a young man named Arif noticed the lamp while walking home.\n\nHe had had a long day.\n\nHis thoughts were crowded with unfinished things—things he should have done, things he wished he had said, and things he couldn't change.\n\nWhen he reached the lamp, he sat beneath it.\n\nThe light was warm.\n\nThe trees moved gently in the wind.\n\nFor a while, he did nothing.\n\nThen he noticed something strange.\n\nEvery time he breathed out, the wind seemed to carry one of his worries away.\n\nHe breathed in.\n\nHe breathed out.\n\nI should have...\n\nThe wind took it.\n\nHe breathed in again.\n\nWhat if tomorrow...\n\nThe wind took that too.\n\nSoon, he stopped trying to think.\n\nAbove him, the branches moved slowly against the stars.\n\nSomewhere in the distance, an owl called once, then became silent.\n\nArif closed his eyes.\n\nFor the first time that day, he realized something simple:\n\nNot everything needed to be solved tonight.\n\nSome things could wait for morning.\n\nHe leaned against the old tree beside the lamp.\n\nThe warmth touched his face.\n\nHis breathing became slower.\n\nAnd just before he fell asleep, he heard a tiny sound above him.\n\nClick.\n\nThe lamp went out.\n\nBut the road did not become completely dark.\n\nThe moon was there.\n\nIt had been there all along.\n\nAnd beneath its quiet silver light, Arif slept peacefully until morning.\n\nWhen he finally woke, the lamp was gone.\n\nOnly the empty road remained.\n\nBut from that day onward, whenever life felt too loud, Arif would walk to that place, sit beneath the old tree, and remember:\n\nNight is not asking you to solve tomorrow.\nIt is only asking you to rest.\n\nAnd somehow, that was enough.\n\nGood night. 🌙","media":[]},{"id":30,"text":"2:08am","media":[]},{"id":31,"text":"😕😕😕\nkeo nai jar shathe problem share korbo.","media":[]},{"id":32,"text":"","media":[{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/100/87d859ef39a6ef1bb9bddb36c83c9844.jpg"}]},{"id":33,"text":"","media":[{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/100/c44930124416e13151bd84982765b9bf.jpg"}]},{"id":34,"text":"","media":[{"type":"facebook","url":"https://www.facebook.com/share/v/14uB1wv1w4s/"}]},{"id":35,"text":"Five Precision Rifles, Four Countries, One Mission — A Visual Comparison of Modern Long-Range Rifle Designs #usa #europe","media":[{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/100/FB_IMG_1790192751592.jpg"}]},{"id":36,"text":"Coming soon Motorola Signature 27 😍\n\n#motorola #smartphone","media":[{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/100/FB_IMG_1790192502032.jpg"}]},{"id":37,"text":"","media":[{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/100/581f90888a9b79b44c8d59e0af6b9acd.jpg"}]},{"id":38,"text":"","media":[{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/100/a3062545b1e6a2522975e39161b3a30b.jpg"}]},{"id":39,"text":"","media":[{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/100/ab544dc892154749ff8450839b7f0688.jpg"}]},{"id":40,"text":"Barrett M82A1: A Detailed Look at the Legendary .50 BMG Semi-Automatic Rifle and Its Distinctive Long-Range Design #usa #america","media":[{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/100/FB_IMG_1790188889379.jpg"}]},{"id":41,"text":"23 tarike naki class hy nai AJ ki jabo???","media":[]},{"id":42,"text":"12:39am 24 sap 2026","media":[]},{"id":43,"text":"😕😕😕","media":[]},{"id":44,"text":"ভালোবাসার চাষ\n\nতোমরা কোনোদিন ভালোবাসা চাষ করে দেখেছো?\nকতই না কষ্ট হয়—\nএক মুঠো মাটির বুকে\nস্বপ্নের বীজ পুঁতে রাখা,\nতারপর প্রতিদিন প্রতীক্ষায় থাকা\nকোনো এক অদৃশ্য ঋতুর।\n\nভালোবাসার জমিনে\nজল দিতে হয় চোখের জলে,\nরোদ দিতে হয় অপেক্ষার,\nআর আগাছার মতো\nযে সংশয় জন্মায় হৃদয়ের কোণে,\nতাহা উপড়ে ফেলিতে হয়\nনিজেরই দুই হাতে।\n\nতবু কি সব ফসল ফলে?\nসব ফুল কি সুবাস দেয়?\nসব বসন্ত কি ফিরে আসে\nএকই গাছের ডালে?\n\nনা—\nকিছু বীজ মাটির নিচেই হারায়,\nকিছু কুঁড়ি ফুটিবার আগেই ঝরে যায়,\nআর কিছু ভালোবাসা\nশুধু হৃদয়ের গোপন বাগানে\nনামহীন ফুল হয়ে থাকে।\n\nতবু মানুষ চাষ করে।\n\nকারণ মানুষ আশাবাদী,\nমানুষ স্বপ্ন দেখে,\nমানুষ জানে—\nএকদিন হয়তো\nতার শূন্য উঠোনেও\nশিউলি ঝরবে ভোরের শিশিরে।\n\nআজ তেমনই একদিন ছিল।\n\nকোনো পূর্বঘোষণা ছিল না,\nআকাশে কোনো বিশেষ মেঘ ছিল না,\nবাতাসও জানত না\nকী ঘটিতে চলেছে আমার অন্তরে।\n\nআমি গিয়েছিলাম\nঅতি সাধারণ এক প্রয়োজনে—\nমানুষ যেমন যায়,\nআসে,\nকথা বলে,\nতারপর নিজের জীবনে ফিরে যায়।\n\nকিন্তু সেদিন\nজীবন আমাকে ফিরতে দিল না\nআগের সেই মানুষ হয়ে।\n\nসেখানে,\nক্যাপিটাল হাসপাতালের ব্যস্ত কাউন্টারের পাশে\nসে দাঁড়িয়ে ছিল।\n\nনিজের কর্মে নিমগ্ন,\nঅচেনা মানুষের ভিড়ে,\nদৈনন্দিন ব্যস্ততার মাঝখানে—\nতবু কেন জানি\nআমার চোখে\nসেই মুহূর্তে পৃথিবীর আর কিছুই ছিল না।\n\nতার পরনে ছিল\nএকটি লাল পোশাক।\n\nসে লাল—\nশুধু কোনো পোশাকের লাল নয়,\nমনে হলো\nশরতের সন্ধ্যায় পশ্চিম আকাশে\nসূর্য ডোবার আগের যে রঙ,\nসেই রঙ এসে\nতার পোশাকে আশ্রয় নিয়েছে।\n\nতার ঠোঁটে\nলালেরই আরেকটি ভাষা,\nআর চোখে—\n\nআহা, সে চোখ!\n\nকী মধুময় তাহার দৃষ্টি,\nকী অদ্ভুত তাহার আলো!\n\nশত মানুষের ভিড়ের মাঝে\nশত মুখের আসা-যাওয়ার ভিতরেও\nআমার চোখ শুধু\nতার চোখ দুটির কাছেই\nবারবার ফিরে গেল।\n\nআর আশ্চর্য—\n\nতাহার চোখও\nবারবার ফিরিয়া আসিল\nআমারই দিকে।\n\nহয়তো সে কেবলই দেখেছিল,\nহয়তো তার দৃষ্টির কোনো অর্থ ছিল না,\nহয়তো আমি-ই\nএকটি সাধারণ মুহূর্তের মধ্যে\nঅসাধারণ কোনো গল্প খুঁজছিলাম।\n\nকে জানে!\n\nকবিরা তো এমনই—\nএকটি দৃষ্টির ভিতর\nসমুদ্র দেখে,\nএকটি হাসির ভিতর\nবসন্তের আগমন শোনে,\nআর একটি নীরবতার মধ্যে\nসহস্র কথা পড়ে।\n\nআমি জানি না\nসে আমার দিকে কেন তাকিয়েছিল।\n\nকোনো কথা হয়নি,\nকোনো পরিচয় হয়নি,\nনামটিও জানা হলো না।\n\nতবু তার সেই দৃষ্টি\nআমার দিনের সমস্ত শব্দকে\nকেমন যেন নীরব করে দিল।\n\nমনে হলো—\n\nভিড়ের মধ্যে\nদু'টি চোখ হঠাৎ\nদু'টি অচেনা তীর থেকে\nএকই নদীর দিকে তাকিয়েছে।\n\nসে আবার কাজে ফিরল,\nআমি দাঁড়িয়ে রইলাম।\n\nসময় চলছিল নিজের নিয়মে,\nঘড়ির কাঁটা জানত না\nআমার হৃদয়ে তখন\nকোন নতুন ঋতু জন্ম নিচ্ছে।\n\nমানুষ আসছে,\nমানুষ যাচ্ছে,\nকাউন্টারে কথার ভিড়,\nপায়ের শব্দ,\nব্যস্ততার ঢেউ—\n\nআর সেই সমস্ত কোলাহলের মাঝেও\nআমি কেবল শুনছিলাম\nআমার নিজের হৃদয়ের শব্দ।\n\nধুক্—\n\nধুক্—\n\nধুক্—\n\nযেন বহুদিনের অনাবাদী জমিতে\nপ্রথম বৃষ্টির ফোঁটা পড়েছে।\n\nতখন বুঝলাম—\n\nভালোবাসা হয়তো\nসবসময় পরিচয় দিয়ে শুরু হয় না।\n\nকখনো কখনো\nএকটি চোখের দৃষ্টি\nএকটি অচেনা বিকেলকে\nচিরদিনের স্মৃতি করে দেয়।\n\nকখনো কোনো নাম না জেনেও\nকাউকে মনে রাখা যায়।\n\nকখনো কোনো কথা না বলেও\nএকটি মানুষ\nঅসংখ্য কথা বলে যায়।\n\nআর কখনো—\n\nএকটি লাল পোশাক\nএকটি সাধারণ হাসপাতালের কাউন্টার\nএকটি ব্যস্ত দুপুর\nআর দুটি মধুময় চোখ\nএকজন মানুষের হৃদয়ে\nএকটি সম্পূর্ণ কবিতা লিখে দেয়।\n\nআজও ভাবি—\n\nসে কি সত্যিই\nবারবার আমার দিকে তাকিয়েছিল?\n\nনাকি আমার মুগ্ধ চোখই\nতার প্রতিটি দৃষ্টিকে\nআমার জন্য লেখা কোনো চিঠি ভেবেছিল?\n\nউত্তর আমি জানি না।\n\nজানিবার চেষ্টাও করি না।\n\nকারণ কিছু প্রশ্নের উত্তর\nপেয়ে গেলে\nতাদের সৌন্দর্য নষ্ট হয়ে যায়।\n\nকিছু গল্প\nঅসমাপ্ত থাকলেই\nবেশি সুন্দর।\n\nতাই আজও\nতার নামহীন স্মৃতির পাশে\nআমি কোনো নাম লিখিনি।\n\nশুধু লিখেছি—\n\n\"আজ তাকে যে দেখিলাম।\"\n\nএইটুকুই যথেষ্ট।\n\nহয়তো সে জানে না,\nকোনো এক অচেনা মানুষ\nতার চোখের আলোয়\nসেদিন নিজের হৃদয়ের\nএকটি বন্ধ জানালা খুলে দিয়েছিল।\n\nহয়তো সে জানে না,\nতার লাল পোশাকের রঙ\nসেদিন আমার নির্লিপ্ত দিনটিকে\nকীভাবে রাঙিয়ে দিয়েছিল।\n\nহয়তো সে জানে না,\nতার একটি দৃষ্টি\nআজও আমার স্মৃতির আকাশে\nজোনাকির মতো জ্বলে।\n\nতবু আমি অভিযোগ করব না।\n\nভালোবাসার চাষে\nফসল চাইতেই হবে—\nএমন কোনো নিয়ম নেই।\n\nকখনো একটি ফুল ফুটলেই\nচাষির সমস্ত পরিশ্রম সার্থক।\n\nকখনো একটি দৃষ্টি পেলেই\nএকটি হৃদয়\nসারা জীবন কবিতা লিখতে পারে।\n\nতাই আজ\nহৃদয়ের মাটিতে\nআমি কোনো দাবি বুনিনি।\n\nবুনেছি শুধু\nএকটি নীরব স্মৃতি।\n\nতার পাশে রেখেছি\nএকটু মুগ্ধতা,\nএকটু অপেক্ষা,\nআর অল্প কিছু স্বপ্ন।\n\nযদি কোনোদিন\nসে আবার তাকায়—\n\nতবে হয়তো\nএই অচেনা গল্পের\nআরেকটি পৃষ্ঠা খুলবে।\n\nআর যদি না তাকায়—\n\nতবুও ক্ষতি কী?\n\nআমি তো একদিন\nতাকে দেখেছিলাম।\n\nশত বীরের মাঝে\nশত মানুষের ভিড়ে\nতাহার চোখের আলো\nএসেছিল আমারই দিকে।\n\nবারবার।\n\nসেই একটুকু আলোই\nআজ আমার হৃদয়ের\nঅন্ধকার উঠোনে\nএকটি প্রদীপ হয়ে জ্বলুক।\n\nআমি দূর থেকেই\nতার জন্য প্রার্থনা করব—\n\nসে ভালো থাকুক,\nতার হাসি অমলিন থাকুক,\nতার চোখের সেই মধুময় আলো\nকোনোদিন নিভে না যাক।\n\nআর আমার এই হৃদয়—\n\nসে চাষ করুক।\n\nনিঃশব্দে চাষ করুক।\n\nকারণ ভালোবাসার জমিতে\nসব ফসল ঘরে তুলতে হয় না।\n\nকিছু ফুল\nশুধু ফুটে থাকবার জন্যই আসে।\n\nকিছু মানুষ\nশুধু একবার দেখা দেওয়ার জন্যই আসে।\n\nআর কিছু দৃষ্টি—\n\nসারা জীবন\nএকজন কবির হৃদয়ে\nকবিতা হয়ে বেঁচে থাকে।","media":[{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/100/FB_IMG_1790188609448.jpg"}]},{"id":45,"text":"অচেনা মেয়েটি\n\nসেদিনও দিনটা\nঅন্য দিনের মতোই ছিল।\nকোনো বিশেষ অপেক্ষা ছিল না,\nকোনো অচেনা গল্পেরও শুরু ছিল না।\n\nক্যাপিটাল হাসপাতালের\nব্যস্ত কাউন্টারের পাশে\nহঠাৎ তোমাকে দেখলাম।\n\nতোমার পরনে লাল পোশাক,\nচারপাশে মানুষের ভিড়—\nতবু কেন যেন\nআমার চোখ শুধু তোমার কাছেই থেমে গেল।\n\nতুমি নিজের কাজে ব্যস্ত ছিলে।\nহঠাৎ একবার তাকালে আমার দিকে।\n\nআমিও তাকিয়ে ছিলাম।\n\nকয়েক মুহূর্তের সেই চোখাচোখি—\nকথা ছিল না,\nপরিচয় ছিল না,\nতবু মনে হলো\nকেমন যেন কিছু একটা ঘটে গেল।\n\nহয়তো তুমি শুধু\nকাকতালীয়ভাবে তাকিয়েছিলে।\nহয়তো আমার মনই\nসেই দৃষ্টির ভেতর\nএকটা গল্প খুঁজে নিয়েছিল।\n\nসত্যিটা আজও জানি না।\n\nশুধু জানি,\nসেদিন বাড়ি ফেরার পর\nঅকারণেই তোমার কথা মনে পড়েছিল।\n\nতোমার নাম জানি না,\nকোথায় থাকো জানি না,\nতোমার জীবনে কী গল্প আছে\nতাও জানি না।\n\nতবু তোমাকে মনে আছে।\n\nহয়তো সব মানুষ\nআমাদের জীবনে থাকার জন্য আসে না।\nকেউ কেউ শুধু\nএকটা মুহূর্তকে সুন্দর করে\nচলে যায়।\n\nতুমিও হয়তো তেমনই।\n\nআমি তোমাকে কিছু চাই না,\nকোনো দাবি নেই,\nকোনো প্রতিশ্রুতিও নয়।\n\nশুধু মাঝে মাঝে মনে হয়—\nযদি আবার দেখা হয়ে যায়!\n\nতখন হয়তো\nতোমার নামটা জিজ্ঞেস করব।\n\nআর যদি দেখা না হয়,\nতবুও আফসোস থাকবে না।\n\nকারণ তোমাকে একবার\nদেখেছিলাম তো।\n\nএকটি ব্যস্ত হাসপাতাল,\nএকটি লাল পোশাক,\nদুটি চোখ\nআর কয়েক মুহূর্তের নীরবতা—\n\nএইটুকুই হয়তো\nআমাদের গল্পের জন্য যথেষ্ট।\n\nতুমি হয়তো আমাকে\nকোনোদিন মনে রাখবে না।\n\nকিন্তু আমার স্মৃতিতে\nতুমি থেকে যাবে—\n\nএকজন অচেনা মেয়ে হয়ে,\nযে কোনো এক সাধারণ দিনে\nহঠাৎ এসে\nআমার দিনটাকে\nএকটু অসাধারণ করে দিয়েছিল।","media":[]},{"id":46,"text":"U.S. Military Most Powerful Assault Rifles — A Detailed Comparison of the M7 Rifle, M27 IAR, and M4A1 Carbine","media":[{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/100/FB_IMG_1790188051584.jpg"}]},{"id":47,"text":"","media":[{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/100/FB_IMG_1790186539071.jpg"}]},{"id":48,"text":"","media":[{"type":"image","url":"https://cdn.jsdelivr.net/gh/uuhjeike/Gojo-Back@main/100/0ea64fa6c1ff2f096c906bcb0af3c30a.jpg"}]}];
+
+  /* ---------------- storage helpers ---------------- */
+
+  var LS_LIKES = "gojo_likes_v1";
+  var LS_SAVES = "gojo_saves_v1";
+
+  function loadSet(key) {
+    try {
+      var raw = localStorage.getItem(key);
+      return raw ? new Set(JSON.parse(raw)) : new Set();
+    } catch (e) {
+      return new Set();
+    }
+  }
+  function saveSet(key, set) {
+    try {
+      localStorage.setItem(key, JSON.stringify(Array.from(set)));
+    } catch (e) { /* storage unavailable — interaction still works this session */ }
+  }
+
+  var likedIds = loadSet(LS_LIKES);
+  var savedIds = loadSet(LS_SAVES);
+
+  /* ---------------- text helpers ---------------- */
+
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  // Turns escaped plain text into safe HTML with **bold** and #hashtags.
+  function formatText(text) {
+    var safe = escapeHtml(text);
+    safe = safe.replace(/\*\*([^\n*]+)\*\*/g, "<strong>$1</strong>");
+    safe = safe.replace(/(^|[\s(])#([A-Za-z0-9_]+)/g, function (m, pre, tag) {
+      return pre + '<span class="tag" data-tag="' + tag.toLowerCase() + '">#' + tag + "</span>";
+    });
+    return safe;
+  }
+
+  function hostnameOf(url) {
+    try { return new URL(url).hostname.replace(/^www\./, ""); }
+    catch (e) { return url; }
+  }
+
+  function cleanFileTitle(url) {
+    try {
+      var last = decodeURIComponent(url.split("/").pop() || "");
+      last = last.replace(/\.[a-zA-Z0-9]+$/, "");
+      last = last.replace(/[_\-]+/g, " ").replace(/\s+/g, " ").trim();
+      return last || "Audio track";
+    } catch (e) { return "Audio track"; }
+  }
+
+  /* ---------------- icons (inline, no external requests) ---------------- */
+
+  var ICONS = {
+    heart: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 20s-7-4.35-9.5-8.8C.8 7.9 2.4 4.5 6 4.5c2 0 3.3 1.05 4 2.1.7-1.05 2-2.1 4-2.1 3.6 0 5.2 3.4 3.5 6.7C19 15.65 12 20 12 20z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
+    bookmark: '<svg viewBox="0 0 24 24" fill="none"><path d="M6 4h12v16l-6-4-6 4V4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
+    share: '<svg viewBox="0 0 24 24" fill="none"><circle cx="18" cy="5" r="2.4" stroke="currentColor" stroke-width="1.7"/><circle cx="6" cy="12" r="2.4" stroke="currentColor" stroke-width="1.7"/><circle cx="18" cy="19" r="2.4" stroke="currentColor" stroke-width="1.7"/><path d="M8.1 10.7l7.8-4.4M8.1 13.3l7.8 4.4" stroke="currentColor" stroke-width="1.7"/></svg>',
+    play: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7-11-7z"/></svg>',
+    note: '<svg viewBox="0 0 24 24" fill="none"><path d="M6 3h9l4 4v14H6V3z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 12h6M9 16h6M9 8h3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>',
+    music: '<svg viewBox="0 0 24 24" fill="none"><path d="M9 18V5l11-2v13" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="1.7"/><circle cx="17" cy="16" r="3" stroke="currentColor" stroke-width="1.7"/></svg>',
+    facebook: '<svg viewBox="0 0 24 24" fill="none"><path d="M14 8.5h2.5V5H14c-2 0-3.5 1.5-3.5 3.5V11H8v3.5h2.5V21H14v-6.5h2.5l.5-3.5h-3V9c0-.4.3-.5.5-.5z" fill="currentColor"/></svg>',
+    pin: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 2a7 7 0 00-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 00-7-7z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.3" stroke="currentColor" stroke-width="1.7"/></svg>',
+    doc: '<svg viewBox="0 0 24 24" fill="none"><path d="M6 3h9l4 4v14H6V3z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 12h6M9 16h6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>',
+    link: '<svg viewBox="0 0 24 24" fill="none"><path d="M9.5 14.5l5-5M8 10l-1.5 1.5a3.5 3.5 0 005 5L13 15M16 14l1.5-1.5a3.5 3.5 0 00-5-5L11 9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>'
+  };
+
+  /* ---------------- media renderers ---------------- */
+  // Media that should lazy-load exposes data-src / data-media hooks that
+  // the IntersectionObserver below fills in once the post nears the viewport.
+
+  function renderImageSingle(url) {
+    return (
+      '<div class="media-block"><img class="img-single is-loading" data-src="' +
+      escapeHtml(url) +
+      '" alt="" loading="lazy" decoding="async"></div>'
+    );
+  }
+
+  function renderCarousel(urls, postId) {
+    var imgs = urls
+      .map(function (u, i) {
+        return (
+          '<img data-src="' + escapeHtml(u) + '" alt="" loading="lazy" decoding="async" data-idx="' + i + '">'
+        );
+      })
+      .join("");
+    var dots = urls
+      .map(function (_, i) {
+        return '<span class="' + (i === 0 ? "is-active" : "") + '"></span>';
+      })
+      .join("");
+    return (
+      '<div class="media-block carousel" data-gallery="' + postId + '">' +
+        '<div class="carousel-count">1 / ' + urls.length + '</div>' +
+        '<div class="carousel-track">' + imgs + "</div>" +
+        '<div class="carousel-dots">' + dots + "</div>" +
+      "</div>"
+    );
+  }
+
+  function renderVideo(url) {
+    return (
+      '<div class="media-block video-wrap"><video controls preload="none" playsinline data-src="' +
+      escapeHtml(url) +
+      '"></video></div>'
+    );
+  }
+
+  function renderAudio(url) {
+    var title = cleanFileTitle(url);
+    return (
+      '<div class="media-block audio-card">' +
+        '<div class="audio-icon">' + ICONS.music + "</div>" +
+        '<div class="audio-body">' +
+          '<p class="audio-title">' + escapeHtml(title) + "</p>" +
+          '<audio controls preload="none" data-src="' + escapeHtml(url) + '"></audio>' +
+        "</div>" +
+      "</div>"
+    );
+  }
+
+  function renderYoutube(media) {
+    var vid = media.id;
+    var thumb = "https://img.youtube.com/vi/" + vid + "/hqdefault.jpg";
+    return (
+      '<div class="media-block yt-facade" data-yt="' + vid + '">' +
+        '<img data-src="' + thumb + '" alt="" loading="lazy" decoding="async">' +
+        '<div class="yt-play"><span>' + ICONS.play + "</span></div>" +
+      "</div>"
+    );
+  }
+
+  function renderLinkCard(media) {
+    var kind = media.type;
+    var icon = ICONS.link, title = "Open link", sub = hostnameOf(media.url);
+    if (kind === "facebook") { icon = ICONS.facebook; title = "Watch on Facebook"; }
+    if (kind === "pinterest") { icon = ICONS.pin; title = "View on Pinterest"; }
+    if (kind === "gdoc") { icon = ICONS.doc; title = "Open Google Doc"; }
+    return (
+      '<a class="media-block link-card" href="' + escapeHtml(media.url) + '" target="_blank" rel="noopener noreferrer">' +
+        '<div class="link-icon">' + icon + "</div>" +
+        '<div class="link-body"><p class="link-title">' + title + '</p><p class="link-sub">' + escapeHtml(sub) + "</p></div>" +
+        '<span class="link-arrow">&#8599;</span>' +
+      "</a>"
+    );
+  }
+
+  function renderNote(media, postId) {
+    return (
+      '<div class="media-block note-card" data-note="' + postId + '" data-note-url="' + escapeHtml(media.url) + '">' +
+        '<div class="note-head">' + ICONS.note + "<span>Note</span></div>" +
+        '<div class="note-loading">Loading text&hellip;</div>' +
+      "</div>"
+    );
+  }
+
+  function renderMedia(post) {
+    var media = post.media;
+    if (!media || !media.length) return "";
+
+    var images = media.filter(function (m) { return m.type === "image"; });
+    if (images.length > 1 && images.length === media.length) {
+      return renderCarousel(images.map(function (m) { return m.url; }), post.id);
+    }
+
+    return media
+      .map(function (m) {
+        switch (m.type) {
+          case "image": return renderImageSingle(m.url);
+          case "video": return renderVideo(m.url);
+          case "audio": return renderAudio(m.url);
+          case "youtube": return renderYoutube(m);
+          case "textfile": return renderNote(m, post.id);
+          case "facebook":
+          case "pinterest":
+          case "gdoc":
+          case "link":
+            return renderLinkCard(m);
+          default: return "";
+        }
+      })
+      .join("");
+  }
+
+  /* ---------------- post classification ---------------- */
+
+  function classify(post) {
+    var hasMedia = post.media && post.media.length > 0;
+    var textLen = (post.text || "").trim().length;
+    if (!hasMedia && textLen > 0 && textLen <= 40 && !/\n/.test(post.text)) return "mood";
+    if (!hasMedia && textLen > 220) return "longform";
+    if (!hasMedia && textLen > 0) return "short";
+    return "card";
+  }
+
+  function primaryMediaType(post) {
+    if (!post.media || !post.media.length) return "text";
+    var t = post.media[0].type;
+    if (t === "facebook" || t === "pinterest" || t === "gdoc" || t === "textfile") return "link";
+    return t;
+  }
+
+  /* ---------------- render a post ---------------- */
+
+  function renderPost(post) {
+    var kind = classify(post);
+    var el = document.createElement("article");
+    el.className = "post";
+    el.dataset.id = post.id;
+    el.dataset.mediaType = primaryMediaType(post);
+    el.dataset.search = (post.text || "").toLowerCase();
+
+    var wrapClass = "post-card";
+    if (kind === "longform") wrapClass = "post-longform";
+    if (kind === "mood") wrapClass = "post-mood";
+    if (kind === "short") wrapClass = "post-card";
+
+    var textHtml = post.text ? '<p class="post-text">' + formatText(post.text) + "</p>" : "";
+    var mediaHtml = renderMedia(post);
+
+    var liked = likedIds.has(post.id);
+    var saved = savedIds.has(post.id);
+
+    var actionsHtml =
+      '<div class="post-actions">' +
+        '<button class="action-btn action-like' + (liked ? " is-active" : "") + '" data-action="like" aria-pressed="' + liked + '">' +
+          ICONS.heart + '<span>' + (liked ? "Liked" : "Like") + "</span></button>" +
+        '<button class="action-btn action-save' + (saved ? " is-active" : "") + '" data-action="save" aria-pressed="' + saved + '">' +
+          ICONS.bookmark + '<span>' + (saved ? "Saved" : "Save") + "</span></button>" +
+        '<span class="action-spacer"></span>' +
+        '<button class="action-btn action-share" data-action="share">' + ICONS.share + "<span>Share</span></button>" +
+      "</div>";
+
+    el.innerHTML =
+      '<div class="' + wrapClass + '">' + textHtml + mediaHtml + actionsHtml + "</div>";
+
+    return el;
+  }
+
+  /* ---------------- stats ---------------- */
+
+  function computeStats() {
+    var photos = 0, clips = 0;
+    POSTS.forEach(function (p) {
+      p.media.forEach(function (m) {
+        if (m.type === "image") photos++;
+        if (m.type === "video" || m.type === "youtube") clips++;
+      });
+    });
+    return { posts: POSTS.length, photos: photos, clips: clips };
+  }
+
+  /* ---------------- lazy loading ---------------- */
+
+  var mediaObserver;
+
+  function hydrateMediaIn(container) {
+    var lazyImgs = container.querySelectorAll("img[data-src]");
+    lazyImgs.forEach(function (img) {
+      if (mediaObserver) mediaObserver.observe(img);
+    });
+    var lazyVideos = container.querySelectorAll("video[data-src]");
+    lazyVideos.forEach(function (v) {
+      if (mediaObserver) mediaObserver.observe(v);
+    });
+    var lazyAudio = container.querySelectorAll("audio[data-src]");
+    lazyAudio.forEach(function (a) {
+      if (mediaObserver) mediaObserver.observe(a);
+    });
+    var notes = container.querySelectorAll("[data-note]");
+    notes.forEach(function (n) {
+      if (mediaObserver) mediaObserver.observe(n);
+    });
+  }
+
+  function loadEl(el) {
+    if (el.tagName === "IMG" && el.dataset.src) {
+      el.src = el.dataset.src;
+      el.addEventListener("load", function () { el.classList.remove("is-loading"); }, { once: true });
+      el.addEventListener("error", function () { el.classList.remove("is-loading"); el.alt = "Image unavailable"; }, { once: true });
+      el.removeAttribute("data-src");
+    } else if (el.tagName === "VIDEO" && el.dataset.src) {
+      var src = document.createElement("source");
+      src.src = el.dataset.src;
+      src.type = "video/mp4";
+      el.appendChild(src);
+      el.load();
+      el.removeAttribute("data-src");
+    } else if (el.tagName === "AUDIO" && el.dataset.src) {
+      var asrc = document.createElement("source");
+      asrc.src = el.dataset.src;
+      el.appendChild(asrc);
+      el.load();
+      el.removeAttribute("data-src");
+    } else if (el.dataset && el.dataset.note) {
+      loadNote(el);
+    }
+  }
+
+  function loadNote(el) {
+    var url = el.dataset.noteUrl;
+    fetch(url)
+      .then(function (res) {
+        if (!res.ok) throw new Error("bad response");
+        return res.text();
+      })
+      .then(function (text) {
+        var body = document.createElement("div");
+        body.className = "note-body";
+        body.textContent = text;
+        var loading = el.querySelector(".note-loading");
+        if (loading) loading.replaceWith(body);
+      })
+      .catch(function () {
+        var loading = el.querySelector(".note-loading");
+        if (loading) {
+          loading.innerHTML = 'Could not preview this file. <a href="' + escapeHtml(url) + '" target="_blank" rel="noopener noreferrer" style="color:var(--signal);text-decoration:underline;">Open it directly &#8599;</a>';
+        }
+      });
+    delete el.dataset.note;
+  }
+
+  function initObserver() {
+    mediaObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            loadEl(entry.target);
+            mediaObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "400px 0px" }
+    );
+  }
+
+  /* ---------------- carousel dot sync ---------------- */
+
+  function wireCarousels(container) {
+    container.querySelectorAll(".carousel").forEach(function (car) {
+      var track = car.querySelector(".carousel-track");
+      var dots = car.querySelectorAll(".carousel-dots span");
+      var count = car.querySelector(".carousel-count");
+      var total = dots.length;
+      track.addEventListener(
+        "scroll",
+        throttle(function () {
+          var idx = Math.round(track.scrollLeft / track.clientWidth);
+          idx = Math.max(0, Math.min(total - 1, idx));
+          dots.forEach(function (d, i) { d.classList.toggle("is-active", i === idx); });
+          if (count) count.textContent = idx + 1 + " / " + total;
+        }, 100)
+      );
+    });
+  }
+
+  function throttle(fn, wait) {
+    var t = null, last = 0;
+    return function () {
+      var now = Date.now();
+      var args = arguments;
+      if (now - last >= wait) {
+        last = now;
+        fn.apply(null, args);
+      } else {
+        clearTimeout(t);
+        t = setTimeout(function () { last = Date.now(); fn.apply(null, args); }, wait - (now - last));
+      }
+    };
+  }
+
+  /* ---------------- youtube facade swap ---------------- */
+
+  function wireYoutube(container) {
+    container.querySelectorAll(".yt-facade").forEach(function (facade) {
+      facade.addEventListener("click", function () {
+        var vid = facade.dataset.yt;
+        var wrap = document.createElement("div");
+        wrap.className = "media-block yt-embed-wrap";
+        wrap.innerHTML =
+          '<iframe src="https://www.youtube-nocookie.com/embed/' +
+          encodeURIComponent(vid) +
+          '?autoplay=1&rel=0" title="YouTube video" allow="accelerate-encoded-media; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+        facade.replaceWith(wrap);
+      });
+    });
+  }
+
+  /* ---------------- lightbox ---------------- */
+
+  var lightbox = document.getElementById("lightbox");
+  var lbImg = document.getElementById("lbImg");
+  var lbPrev = document.getElementById("lbPrev");
+  var lbNext = document.getElementById("lbNext");
+  var lbClose = document.getElementById("lbClose");
+  var lbCount = document.getElementById("lbCount");
+  var lbGallery = [];
+  var lbIndex = 0;
+
+  function openLightbox(urls, index) {
+    lbGallery = urls;
+    lbIndex = index;
+    updateLightbox();
+    lightbox.hidden = false;
+    document.body.style.overflow = "hidden";
+  }
+
+  function updateLightbox() {
+    lbImg.src = lbGallery[lbIndex];
+    var multi = lbGallery.length > 1;
+    lbPrev.hidden = !multi;
+    lbNext.hidden = !multi;
+    lbCount.hidden = !multi;
+    if (multi) lbCount.textContent = lbIndex + 1 + " / " + lbGallery.length;
+  }
+
+  function closeLightbox() {
+    lightbox.hidden = true;
+    lbImg.src = "";
+    document.body.style.overflow = "";
+  }
+
+  lbClose.addEventListener("click", closeLightbox);
+  lightbox.addEventListener("click", function (e) { if (e.target === lightbox) closeLightbox(); });
+  lbPrev.addEventListener("click", function () { lbIndex = (lbIndex - 1 + lbGallery.length) % lbGallery.length; updateLightbox(); });
+  lbNext.addEventListener("click", function () { lbIndex = (lbIndex + 1) % lbGallery.length; updateLightbox(); });
+  document.addEventListener("keydown", function (e) {
+    if (lightbox.hidden) return;
+    if (e.key === "Escape") closeLightbox();
+    if (e.key === "ArrowLeft") lbPrev.click();
+    if (e.key === "ArrowRight") lbNext.click();
+  });
+
+  function wireLightboxTriggers(container) {
+    container.querySelectorAll(".img-single").forEach(function (img) {
+      img.addEventListener("click", function () {
+        var src = img.src || img.dataset.src;
+        if (src) openLightbox([src], 0);
+      });
+    });
+    container.querySelectorAll(".carousel").forEach(function (car) {
+      var imgs = Array.from(car.querySelectorAll("img"));
+      imgs.forEach(function (img, i) {
+        img.addEventListener("click", function () {
+          var urls = imgs.map(function (im) { return im.src || im.dataset.src; });
+          openLightbox(urls, i);
+        });
+      });
+    });
+  }
+
+  /* ---------------- toast ---------------- */
+
+  var toastEl = document.getElementById("toast");
+  var toastTimer = null;
+  function showToast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add("is-visible");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.classList.remove("is-visible"); }, 2000);
+  }
+
+  /* ---------------- actions: like / save / share ---------------- */
+
+  function wireActions(container) {
+    container.addEventListener("click", function (e) {
+      var btn = e.target.closest(".action-btn");
+      if (!btn) return;
+      var postEl = e.target.closest(".post");
+      var id = Number(postEl.dataset.id);
+
+      if (btn.dataset.action === "like") {
+        var isLiked = likedIds.has(id);
+        if (isLiked) likedIds.delete(id); else likedIds.add(id);
+        saveSet(LS_LIKES, likedIds);
+        btn.classList.toggle("is-active", !isLiked);
+        btn.setAttribute("aria-pressed", String(!isLiked));
+        btn.querySelector("span").textContent = !isLiked ? "Liked" : "Like";
+      }
+
+      if (btn.dataset.action === "save") {
+        var isSaved = savedIds.has(id);
+        if (isSaved) savedIds.delete(id); else savedIds.add(id);
+        saveSet(LS_SAVES, savedIds);
+        btn.classList.toggle("is-active", !isSaved);
+        btn.setAttribute("aria-pressed", String(!isSaved));
+        btn.querySelector("span").textContent = !isSaved ? "Saved" : "Save";
+        showToast(!isSaved ? "Saved to your bookmarks" : "Removed from bookmarks");
+        if (savedOnly && isSaved) applyFilters();
+      }
+
+      if (btn.dataset.action === "share") {
+        var url = location.href.split("#")[0] + "#post-" + id;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(url).then(function () {
+            showToast("Link copied");
+          }).catch(function () { showToast(url); });
+        } else {
+          showToast(url);
+        }
+      }
+    });
+  }
+
+  /* ---------------- hashtag click -> filter ---------------- */
+
+  function wireHashtags(container) {
+    container.addEventListener("click", function (e) {
+      var tag = e.target.closest(".tag");
+      if (!tag) return;
+      activeTag = tag.dataset.tag;
+      searchInput.value = "";
+      applyFilters();
+    });
+  }
+
+  /* ---------------- feed build + filtering ---------------- */
+
+  var feedEl = document.getElementById("feed");
+  var emptyState = document.getElementById("emptyState");
+  var searchInput = document.getElementById("searchInput");
+  var searchClear = document.getElementById("searchClear");
+  var activeFilter = "all";
+  var activeTag = null;
+  var savedOnly = false;
+  var activeTagBar = document.getElementById("activeTagBar");
+  var activeTagLabel = document.getElementById("activeTagLabel");
+  var activeTagClear = document.getElementById("activeTagClear");
+
+  var postEls = [];
+
+  function buildFeed() {
+    var frag = document.createDocumentFragment();
+    POSTS.forEach(function (post) {
+      var el = renderPost(post);
+      el.id = "post-" + post.id;
+      frag.appendChild(el);
+      postEls.push(el);
+    });
+    feedEl.appendChild(frag);
+
+    hydrateMediaIn(feedEl);
+    wireCarousels(feedEl);
+    wireYoutube(feedEl);
+    wireLightboxTriggers(feedEl);
+    wireActions(feedEl);
+    wireHashtags(feedEl);
+  }
+
+  function applyFilters() {
+    var q = searchInput.value.trim().toLowerCase();
+    searchClear.hidden = q.length === 0;
+
+    activeTagBar.hidden = !activeTag;
+    if (activeTag) activeTagLabel.textContent = "#" + activeTag;
+
+    var visibleCount = 0;
+
+    postEls.forEach(function (el) {
+      var id = Number(el.dataset.id);
+      var mt = el.dataset.mediaType;
+      var text = el.dataset.search;
+
+      var matchesFilter = activeFilter === "all" || mt === activeFilter;
+      var matchesQuery = !q || text.indexOf(q) !== -1;
+      var matchesTag = !activeTag || text.indexOf("#" + activeTag) !== -1;
+      var matchesSaved = !savedOnly || savedIds.has(id);
+
+      var show = matchesFilter && matchesQuery && matchesTag && matchesSaved;
+      el.hidden = !show;
+      if (show) visibleCount++;
+    });
+
+    emptyState.hidden = visibleCount !== 0;
+  }
+
+  searchInput.addEventListener("input", throttle(applyFilters, 120));
+  searchClear.addEventListener("click", function () {
+    searchInput.value = "";
+    applyFilters();
+    searchInput.focus();
+  });
+  activeTagClear.addEventListener("click", function () {
+    activeTag = null;
+    applyFilters();
+  });
+
+  document.querySelectorAll(".feed-tab").forEach(function (tab) {
+    tab.addEventListener("click", function () {
+      document.querySelectorAll(".feed-tab").forEach(function (t) {
+        t.classList.remove("is-active");
+        t.setAttribute("aria-selected", "false");
+      });
+      tab.classList.add("is-active");
+      tab.setAttribute("aria-selected", "true");
+      activeFilter = tab.dataset.filter;
+      applyFilters();
+    });
+  });
+
+  var savedToggle = document.getElementById("savedToggle");
+  savedToggle.addEventListener("click", function () {
+    savedOnly = !savedOnly;
+    savedToggle.setAttribute("aria-pressed", String(savedOnly));
+    applyFilters();
+    if (savedOnly) {
+      document.querySelector(".feed-shell").scrollIntoView({ behavior: "smooth", block: "start" });
+      showToast("Showing your saved posts");
+    }
+  });
+
+  /* ---------------- topbar / scroll chrome ---------------- */
+
+  var topbar = document.getElementById("topbar");
+  var toTop = document.getElementById("toTop");
+
+  window.addEventListener(
+    "scroll",
+    throttle(function () {
+      var y = window.scrollY || document.documentElement.scrollTop;
+      topbar.classList.toggle("is-scrolled", y > 8);
+      toTop.hidden = y < 700;
+    }, 100)
+  );
+
+  toTop.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  /* ---------------- hero video: mute toggle + pause offscreen ---------------- */
+
+  var heroVideo = document.getElementById("heroVideo");
+  var muteBtn = document.getElementById("muteBtn");
+  var muteIconOn = document.getElementById("muteIconOn");
+  var muteIconOff = document.getElementById("muteIconOff");
+
+  muteBtn.addEventListener("click", function () {
+    heroVideo.muted = !heroVideo.muted;
+    var isMuted = heroVideo.muted;
+    muteBtn.setAttribute("aria-pressed", String(isMuted));
+    muteBtn.setAttribute("aria-label", isMuted ? "Unmute background video" : "Mute background video");
+    muteIconOn.hidden = !isMuted;
+    muteIconOff.hidden = isMuted;
+  });
+
+  var heroObserver = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          heroVideo.play().catch(function () {});
+        } else {
+          heroVideo.pause();
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+  heroObserver.observe(document.getElementById("hero"));
+
+  /* ---------------- init ---------------- */
+
+  function init() {
+    var stats = computeStats();
+    document.getElementById("statPosts").textContent = stats.posts;
+    document.getElementById("statPhotos").textContent = stats.photos;
+    document.getElementById("statClips").textContent = stats.clips;
+
+    initObserver();
+    buildFeed();
+
+    // Deep-link support: #post-N scrolls to that post once rendered.
+    if (location.hash && location.hash.indexOf("#post-") === 0) {
+      var target = document.querySelector(location.hash);
+      if (target) setTimeout(function () { target.scrollIntoView({ block: "center" }); }, 60);
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
+
+</script>
+</body>
+</html>
